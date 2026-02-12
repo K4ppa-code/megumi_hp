@@ -3,6 +3,14 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // パスワード認証
+    initPasswordProtection();
+});
+
+/**
+ * サイト初期化（認証後に実行）
+ */
+function initSite() {
     // ローダー
     initLoader();
 
@@ -20,7 +28,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Intersection Observer アニメーション
     initRevealAnimations();
-});
+}
+
+/**
+ * パスワード保護
+ */
+function initPasswordProtection() {
+    const passwordScreen = document.getElementById('passwordScreen');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const password1Input = document.getElementById('password1');
+    const password2Input = document.getElementById('password2');
+    const submitBtn1 = document.getElementById('submitPassword1');
+    const submitBtn2 = document.getElementById('submitPassword2');
+    const error1 = document.getElementById('error1');
+    const error2 = document.getElementById('error2');
+
+    // 既に認証済みかチェック（セッション中のみ有効）
+    if (sessionStorage.getItem('authenticated') === 'true') {
+        passwordScreen.classList.add('hidden');
+        initSite();
+        return;
+    }
+
+    // パスワード1の検証
+    const PASSWORD1 = '1129';
+    // パスワード2の検証
+    const PASSWORD2 = 'じろー';
+
+    function checkPassword1() {
+        const input = password1Input.value.trim();
+        if (input === PASSWORD1) {
+            step1.style.display = 'none';
+            step2.style.display = 'flex';
+            password2Input.focus();
+            error1.textContent = '';
+        } else {
+            error1.textContent = 'パスワードが違います';
+            password1Input.value = '';
+            password1Input.focus();
+        }
+    }
+
+    function checkPassword2() {
+        const input = password2Input.value.trim();
+        if (input === PASSWORD2) {
+            // 認証成功
+            sessionStorage.setItem('authenticated', 'true');
+            passwordScreen.classList.add('hidden');
+            initSite();
+        } else {
+            error2.textContent = '答えが違います';
+            password2Input.value = '';
+            password2Input.focus();
+        }
+    }
+
+    // ボタンクリック
+    submitBtn1.addEventListener('click', checkPassword1);
+    submitBtn2.addEventListener('click', checkPassword2);
+
+    // Enterキーで送信
+    password1Input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            checkPassword1();
+        }
+    });
+
+    password2Input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            checkPassword2();
+        }
+    });
+
+    // 初期フォーカス
+    password1Input.focus();
+}
 
 /**
  * ローダー
@@ -49,21 +132,37 @@ function initNavigation() {
     const header = document.getElementById('header');
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
+    const navOverlay = document.getElementById('navOverlay');
 
     // モバイルメニュートグル
-    navToggle.addEventListener('click', () => {
+    function toggleMenu() {
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
+        if (navOverlay) {
+            navOverlay.classList.toggle('active');
+        }
         document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-    });
+    }
+
+    function closeMenu() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        if (navOverlay) {
+            navOverlay.classList.remove('active');
+        }
+        document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', toggleMenu);
+
+    // オーバーレイクリックでメニューを閉じる
+    if (navOverlay) {
+        navOverlay.addEventListener('click', closeMenu);
+    }
 
     // メニューリンクをクリックしたら閉じる
     navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
     });
 
     // スクロール時のヘッダースタイル変更
@@ -80,6 +179,41 @@ function initNavigation() {
 
         lastScroll = currentScroll;
     });
+
+    // モバイル下部ナビのアクティブ状態管理
+    initMobileBottomNav();
+}
+
+/**
+ * モバイル下部ナビゲーション
+ */
+function initMobileBottomNav() {
+    const sections = document.querySelectorAll('section[id]');
+    const mobileNavLinks = document.querySelectorAll('.mobile-bottom-nav a[href^="#"]');
+
+    if (mobileNavLinks.length === 0) return;
+
+    function updateActiveLink() {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 150;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                mobileNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', utils.throttle(updateActiveLink, 100));
+    updateActiveLink();
 }
 
 /**
@@ -112,16 +246,22 @@ function initScrollEffects() {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (targetId === '#') {
+                e.preventDefault();
+                return;
+            }
 
             const targetElement = document.querySelector(targetId);
             if (!targetElement) return;
 
+            e.preventDefault();
+
             const headerHeight = document.getElementById('header').offsetHeight;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            const isMobile = window.innerWidth <= 768;
+            // モバイルの場合は下部ナビの高さも考慮
+            const extraOffset = isMobile ? 20 : 0;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - extraOffset;
 
             window.scrollTo({
                 top: targetPosition,
