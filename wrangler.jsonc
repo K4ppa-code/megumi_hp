@@ -2,7 +2,7 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",
 	// Worker の表示名（*.workers.dev の URL になる。例: takehari → takehari.k4ppa.workers.dev）
-	"name": "megumi-hp",
+	"name": "takehari",
 	// 互換性日付（必須）
 	"compatibility_date": "2025-01-15",
 	"compatibility_flags": [
