@@ -41,8 +41,8 @@ export default function Home() {
                 <li><a href="#nerves">自律神経と鍼灸</a></li>
                 <li><a href="#symptoms">適応疾患</a></li>
                 <li><a href="#fee">料金・診察日</a></li>
-                <li><a href="#contact">ご予約</a></li>
                 <li><a href="#access">アクセス</a></li>
+                <li><a href="#contact">ご予約</a></li>
                 <li><a href="/contact" className="nav-cta">お問い合わせ</a></li>
               </ul>
             </nav>
