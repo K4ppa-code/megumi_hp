@@ -2,7 +2,6 @@
 
 import PasswordProtection from '@/components/PasswordProtection'
 import ClientScripts from '@/components/ClientScripts'
-import ContactForm from '@/components/ContactForm'
 import MonthReservationStatus from '@/components/MonthReservationStatus'
 import { useState } from 'react'
 
@@ -42,8 +41,9 @@ export default function Home() {
                 <li><a href="#nerves">自律神経と鍼灸</a></li>
                 <li><a href="#symptoms">適応疾患</a></li>
                 <li><a href="#fee">料金・診察日</a></li>
+                <li><a href="#contact">ご予約</a></li>
                 <li><a href="#access">アクセス</a></li>
-                <li><a href="#contact" className="nav-cta">お問い合わせ</a></li>
+                <li><a href="/contact" className="nav-cta">お問い合わせ</a></li>
               </ul>
             </nav>
           </header>
@@ -553,9 +553,17 @@ export default function Home() {
                     month={new Date().getMonth() + 1}
                   />
                 </div>
-                <div className="contact-form-wrapper">
-                  <h3>メールでのお問い合わせ</h3>
-                  <ContactForm />
+                <div className="contact-form-link-wrapper">
+                  <a href="/contact" className="contact-form-link">
+                    <span className="contact-form-link-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="28" height="28">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                    </span>
+                    <span className="contact-form-link-text">メールでのお問い合わせ</span>
+                    <span className="contact-form-link-note">クリックするとフォームが表示されます</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -590,7 +598,7 @@ export default function Home() {
                       <li><a href="#">診療日誌</a></li>
                       <li><a href="#">ブログ</a></li>
                       <li><a href="#access">交通アクセス</a></li>
-                      <li><a href="#contact">お問い合わせ</a></li>
+                      <li><a href="/contact">お問い合わせ</a></li>
                       <li><a href="/admin">予約管理</a></li>
                     </ul>
                   </div>
