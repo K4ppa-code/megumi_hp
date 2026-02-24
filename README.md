@@ -93,6 +93,9 @@ Worker の **Settings** → **Builds** → **Build configuration** で次を設�
 | **Deploy command** | `npx wrangler deploy` または `npm run deploy:worker` |
 | **Root directory** | 空欄（リポジトリルートでビルドする場合） |
 
+> **⚠️ デプロイで「.open-next/worker.js was not found」と出る場合**  
+> ビルドコマンドが `npm run build` のままになっています。上記のとおり **Build command を `npm run build:worker` に変更**し、保存してから再デプロイしてください。
+
 - ビルド時の環境変数（`NEXT_PUBLIC_*` など）が必要な場合は、**Build variables and secrets** に追加します。
 - 本番用のシークレット（`ADMIN_PASSWORD_1` など）は **Settings** → **Variables and Secrets** で設定し、ビルド変数とは別にしてください。
 
