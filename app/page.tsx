@@ -3,7 +3,6 @@
 import PasswordProtection from '@/components/PasswordProtection'
 import ClientScripts from '@/components/ClientScripts'
 import ContactForm from '@/components/ContactForm'
-import CheckAvailability from '@/components/CheckAvailability'
 import MonthReservationStatus from '@/components/MonthReservationStatus'
 import { useState } from 'react'
 
@@ -522,10 +521,10 @@ export default function Home() {
 
           <section className="contact" id="contact">
             <div className="container">
-              <div className="contact-content">
+              <div className="contact-content contact-content--stacked">
                 <div className="contact-info">
                   <span className="section-label">Contact</span>
-                  <h2 className="section-title">ご予約・お問い合わせ</h2>
+                  <h2 className="section-title">ご予約</h2>
                   <p className="contact-description">
                     完全予約制となっております。<br />
                     お電話にてご予約ください。
@@ -547,7 +546,12 @@ export default function Home() {
                       <p>日曜・祝日 休診</p>
                     </div>
                   </div>
-                  <CheckAvailability />
+                </div>
+                <div className="contact-reservation-status">
+                  <MonthReservationStatus
+                    year={new Date().getFullYear()}
+                    month={new Date().getMonth() + 1}
+                  />
                 </div>
                 <div className="contact-form-wrapper">
                   <h3>メールでのお問い合わせ</h3>
@@ -556,11 +560,6 @@ export default function Home() {
               </div>
             </div>
           </section>
-
-          <MonthReservationStatus
-            year={new Date().getFullYear()}
-            month={new Date().getMonth() + 1}
-          />
 
           <footer className="footer">
             <div className="container">

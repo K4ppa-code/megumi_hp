@@ -214,7 +214,7 @@ npx wrangler d1 migrations create takeuchi-reservations <説明>
 ### 機能
 
 - **管理画面** `/admin` … カレンダーで日付・時間帯ごとに「予約可能／予約不可」を設定
-- **トップページ** … ご予約・お問い合わせセクションで「予約可能か確認する」、フッター直前に「予約状況（1か月）」を表示
+- **トップページ** … 「ご予約」セクションで電話案内・予約状況（1か月）・メールお問い合わせを表示
 
 RSC（React Server Components）と Server Actions で D1 を操作しています。
 

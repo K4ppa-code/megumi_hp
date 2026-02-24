@@ -1393,6 +1393,23 @@ input, textarea, select {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4xl);
 }
+/* ご予約セクション：縦並び（電話 → 予約状況 → メール問合せ） */
+.contact-content--stacked {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contact-reservation-status {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+}
+.contact-reservation-status .reservation-status {
+    padding: var(--space-2xl);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
 
 .contact-description {
     color: rgba(255, 255, 255, 0.7);
@@ -1978,6 +1995,14 @@ input, textarea, select {
         padding: var(--space-xl);
     }
 
+    .contact-reservation-status {
+        margin-top: var(--space-xl);
+        margin-bottom: var(--space-xl);
+    }
+    .contact-reservation-status .reservation-status {
+        padding: var(--space-xl);
+    }
+
     /* Footer mobile */
     .footer {
         padding: var(--space-3xl) 0 var(--space-xl);
@@ -2298,60 +2323,6 @@ input, textarea, select {
 .reservation-calendar-slot[data-available="false"] {
     color: var(--color-text-muted);
 }
-
-/* Check Availability (client) */
-.check-availability {
-    margin-top: var(--space-lg);
-    padding: var(--space-lg);
-    background: var(--color-bg-alt);
-    border-radius: var(--radius-md);
-}
-.check-availability h3 {
-    font-size: 1.125rem;
-    margin-bottom: var(--space-md);
-    color: var(--color-text);
-}
-.check-availability-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    align-items: center;
-}
-.check-availability-form input[type="date"] {
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid rgba(74, 59, 50, 0.2);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
-    font-size: 1rem;
-}
-.check-availability-result {
-    margin-top: var(--space-lg);
-    padding-top: var(--space-lg);
-    border-top: 1px solid rgba(74, 59, 50, 0.1);
-}
-.check-availability-date {
-    font-weight: 600;
-    margin-bottom: var(--space-sm);
-    color: var(--color-text);
-}
-.check-availability-slots {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: var(--space-xs);
-}
-.check-availability-slots li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--color-white);
-    border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-}
-.check-availability-slots li[data-available="1"] .slot-status { color: var(--color-primary-dark); }
-.check-availability-slots li[data-available="0"] .slot-status { color: var(--color-text-muted); }
-.check-availability-slots li[data-available="null"] .slot-status { color: var(--color-text-muted); opacity: 0.8; }
 
 /* Admin page */
 .admin-page {
