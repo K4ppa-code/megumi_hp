@@ -104,6 +104,22 @@ Worker の **Settings** → **Builds** → **Build configuration** で次を設�
 - デプロイが成功すると、`<Worker名>.workers.dev` の URL でサイトが表示されます。
 - カスタムドメイン（例: `takehari.com`）を使う場合は、次の「カスタムドメインの設定」を行います。
 
+#### 5. Workers Builds で「Worker 名」（URL）を変えたい場合
+
+Git 連携している場合、**Cloudflare の「Worker 名」が wrangler より優先**されます。`wrangler.jsonc` の `name` を変えても、ダッシュボードの名前が古いままだと Cloudflare のボットが **「名前を一致させる」PR を自動作成**し、wrangler をダッシュボードの名前に戻してしまいます。
+
+**URL を変える手順（例: takehari.k4ppa.workers.dev にしたい）:**
+
+1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) を開く
+2. 該当の **Worker（プロジェクト）** をクリック
+3. **Settings** を開き、**「Worker 名」や「Name」** を変更できる項目を探す（**General** や **Builds** の近くにあることが多いです）
+4. 名前を **takehari**（希望の名前）に変更して保存
+5. リポジトリの `wrangler.jsonc` の `"name"` を同じ **takehari** にし、コミット・プッシュする
+
+これでダッシュボードと wrangler が一致し、ボットの PR で上書きされず、次回デプロイ後に `https://takehari.k4ppa.workers.dev` でアクセスできるようになります。
+
+- ダッシュボードに「名前変更」の項目が見つからない場合は、[Cloudflare のドキュメント（Worker name requirement）](https://developers.cloudflare.com/workers/ci-cd/builds/troubleshoot/#workers-name-requirement) やサポートで確認してください。
+
 ### カスタムドメインの設定（例: takehari.～）
 
 `takehari.com` や `www.takehari.com` のように独自ドメインで公開する手順です。

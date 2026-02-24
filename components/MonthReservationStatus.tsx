@@ -67,8 +67,12 @@ export default function MonthReservationStatus({ year: initialYear, month: initi
     <section className="reservation-status" aria-labelledby="reservation-status-title">
       <div className="container">
         <span className="section-label">Reservation</span>
-        <h2 id="reservation-status-title" className="section-title">予約状況（1か月単位）</h2>
-        <p className="section-description">月・日を選ぶと、その日の予約可能(○)／予約不可(×)が表示されます。未設定の枠はすべて予約可能です。</p>
+        <h2 id="reservation-status-title" className="section-title">予約状況</h2>
+        <p className="section-description reservation-status-description">
+          月・日を選ぶと、その日の予約可能(○)／予約不可(×)が表示されます。
+          <br className="reservation-status-desc-br" />
+          未設定の枠はすべて予約可能です。
+        </p>
 
         <div className="reservation-dropdowns">
           <label className="reservation-dropdown-group">

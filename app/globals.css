@@ -2222,6 +2222,10 @@ input, textarea, select {
     background: var(--color-white);
     cursor: pointer;
 }
+/* 予約状況の説明文：意図した位置で改行し、「未設定の枠」と「は」の間で折れないようにする */
+.reservation-status-description {
+    line-height: 1.7;
+}
 .reservation-status-loading {
     color: var(--color-text-muted);
     padding: var(--space-lg) 0;
