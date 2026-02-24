@@ -59,6 +59,70 @@ npm run deploy
 | **ビルドコマンド** | `npm run build:worker` |
 | **デプロイコマンド** | `npx wrangler deploy` または `npm run deploy:worker` |
 
+### GitHub 経由で Cloudflare にデプロイする（推奨）
+
+コードを GitHub にプッシュするたびに自動でビルド・デプロイするには、Cloudflare の **Workers Builds** でリポジトリを接続します。
+
+#### 1. コードを GitHub にプッシュする
+
+まだの場合、リポジトリを作成してプッシュします。
+
+```bash
+# リモートが未設定の場合
+git remote add origin https://github.com/<あなたのユーザー名>/<リポジトリ名>.git
+git branch -M main
+git push -u origin main
+```
+
+#### 2. Cloudflare でリポジトリをインポート
+
+1. [Cloudflare ダッシュボード](https://dash.cloudflare.com/) を開く
+2. **Workers & Pages** を開く
+3. **Create application** → **Get started**（**Import a repository** の横）
+4. **Git account** で GitHub を選び、このプロジェクトのリポジトリを選択
+5. **Save and Deploy** の前に、下記のビルド設定を行う
+
+#### 3. ビルド設定（必須）
+
+Worker の **Settings** → **Builds** → **Build configuration** で次を設定します。
+
+| 項目 | 値 |
+|------|-----|
+| **Git branch** | `main`（本番用ブランチ） |
+| **Build command** | `npm run build:worker` |
+| **Deploy command** | `npx wrangler deploy` または `npm run deploy:worker` |
+| **Root directory** | 空欄（リポジトリルートでビルドする場合） |
+
+- ビルド時の環境変数（`NEXT_PUBLIC_*` など）が必要な場合は、**Build variables and secrets** に追加します。
+- 本番用のシークレット（`ADMIN_PASSWORD_1` など）は **Settings** → **Variables and Secrets** で設定し、ビルド変数とは別にしてください。
+
+#### 4. 初回デプロイ後
+
+- デプロイが成功すると、`<Worker名>.workers.dev` の URL でサイトが表示されます。
+- カスタムドメイン（例: `takehari.com`）を使う場合は、次の「カスタムドメインの設定」を行います。
+
+### カスタムドメインの設定（例: takehari.～）
+
+`takehari.com` や `www.takehari.com` のように独自ドメインで公開する手順です。
+
+#### 前提
+
+- 使いたいドメイン（例: `takehari.com`）を **Cloudflare にゾーンとして追加**している必要があります。  
+  （ドメイン取得だけの場合は、Cloudflare の「サイトを追加」でネームサーバーを切り替えます。）
+
+#### 手順
+
+1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) を開く
+2. デプロイした **Worker** をクリック
+3. **Settings** → **Domains & Routes** → **Add** → **Custom Domain**
+4. 使いたいドメインを入力（例: `takehari.com` または `www.takehari.com`）
+5. **Add Custom Domain** をクリック
+
+Cloudflare が DNS レコードと証明書を自動作成します。数分で `https://takehari.com` などでアクセスできるようになります。
+
+- 複数ホスト（例: `takehari.com` と `www.takehari.com`）を使う場合は、それぞれ Custom Domain を追加してください。
+- Worker 名（`wrangler.jsonc` の `name`）はドメインと一致している必要はありません。表示用の名前です。
+
 ### 初回デプロイ前の設定
 
 初回デプロイ前に、Cloudflareアカウントにログインします：
