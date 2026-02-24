@@ -1469,9 +1469,6 @@ input, textarea, select {
 .contact-reservation-status .reservation-status .container {
     max-width: 100%;
 }
-.contact-reservation-status .reservation-day-slots {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-}
 
 .contact-description {
     color: rgba(255, 255, 255, 0.7);
@@ -2337,20 +2334,42 @@ input, textarea, select {
     margin-bottom: var(--space-md);
     color: var(--color-text);
 }
+/* 9〜12時・14時以降の2段、中央配置 */
+.reservation-slots-rows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+}
 .reservation-day-slots {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
 }
 .reservation-day-slot {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: var(--space-sm) var(--space-md);
+    justify-content: center;
+    padding: var(--space-md);
+    min-width: 5rem;
     background: var(--color-bg-alt);
     border-radius: var(--radius-sm);
     font-size: 0.875rem;
+    text-align: center;
+}
+.reservation-slot-time {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+}
+.reservation-slot-status {
+    white-space: nowrap;
 }
 .reservation-day-slot[data-available="true"] .reservation-slot-status { color: var(--color-primary-dark); font-weight: 500; }
 .reservation-day-slot[data-available="false"] .reservation-slot-status { color: var(--color-text-muted); }

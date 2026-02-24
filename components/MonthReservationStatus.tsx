@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getAvailabilityForMonthAction } from '@/app/actions/reservation';
-import { SLOTS } from '@/lib/constants';
 
 const MONTHS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const SLOTS_MORNING = ['09:00', '10:00', '11:00', '12:00'] as const;
+const SLOTS_AFTERNOON = ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00'] as const;
 
 function getLastDay(year: number, month: number) {
   return new Date(year, month, 0).getDate();
@@ -14,9 +15,13 @@ type Props = { year: number; month: number };
 
 export default function MonthReservationStatus({ year: initialYear, month: initialMonth }: Props) {
   const now = new Date();
+  const todayYear = now.getFullYear();
+  const todayMonth = now.getMonth() + 1;
+  const todayDay = now.getDate();
+  const initialDay = initialYear === todayYear && initialMonth === todayMonth ? todayDay : 1;
   const [year, setYear] = useState(initialYear);
   const [month, setMonth] = useState(initialMonth);
-  const [day, setDay] = useState(1);
+  const [day, setDay] = useState(initialDay);
   const [slots, setSlots] = useState<{ date: string; slot: string; available: number }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,8 +44,23 @@ export default function MonthReservationStatus({ year: initialYear, month: initi
   }, [year, month]);
 
   const lastDay = getLastDay(year, month);
-  const days = Array.from({ length: lastDay }, (_, i) => i + 1);
-  const safeDay = Math.min(day, lastDay);
+  const isPastMonth = year < todayYear || (year === todayYear && month < todayMonth);
+  const isCurrentMonth = year === todayYear && month === todayMonth;
+  const minDay = isPastMonth ? lastDay + 1 : isCurrentMonth ? todayDay : 1;
+  const days = useMemo(
+    () => (minDay <= lastDay ? Array.from({ length: lastDay - minDay + 1 }, (_, i) => minDay + i) : []),
+    [lastDay, minDay]
+  );
+  const safeDay = minDay <= lastDay ? Math.min(Math.max(day, minDay), lastDay) : todayDay;
+  useEffect(() => {
+    if (isPastMonth) {
+      setYear(todayYear);
+      setMonth(todayMonth);
+      setDay(todayDay);
+      return;
+    }
+    setDay((prev) => Math.min(Math.max(prev, minDay), lastDay));
+  }, [year, month, isPastMonth, minDay, lastDay, todayYear, todayMonth, todayDay]);
   const date = `${year}-${String(month).padStart(2, '0')}-${String(safeDay).padStart(2, '0')}`;
 
   const map = new Map(slots.map((s) => [`${s.date}-${s.slot}`, s.available]));
@@ -79,7 +99,12 @@ export default function MonthReservationStatus({ year: initialYear, month: initi
             <span>年</span>
             <select
               value={year}
-              onChange={(e) => setYear(Number(e.target.value))}
+              onChange={(e) => {
+                const y = Number(e.target.value);
+                setYear(y);
+                const isNewYearPast = y < todayYear || (y === todayYear && month < todayMonth);
+                setDay(isNewYearPast ? todayDay : y === todayYear && month === todayMonth ? todayDay : 1);
+              }}
               className="reservation-dropdown"
               aria-label="年"
             >
@@ -93,8 +118,10 @@ export default function MonthReservationStatus({ year: initialYear, month: initi
             <select
               value={month}
               onChange={(e) => {
-                setMonth(Number(e.target.value));
-                setDay(1);
+                const m = Number(e.target.value);
+                setMonth(m);
+                const isNewMonthPast = year < todayYear || (year === todayYear && m < todayMonth);
+                setDay(isNewMonthPast ? todayDay : year === todayYear && m === todayMonth ? todayDay : 1);
               }}
               className="reservation-dropdown"
               aria-label="月"
@@ -124,19 +151,34 @@ export default function MonthReservationStatus({ year: initialYear, month: initi
         ) : (
           <div className="reservation-day-result">
             <h3 className="reservation-day-title">{year}年{month}月{safeDay}日の予約枠</h3>
-            <ul className="reservation-day-slots">
-              {SLOTS.map((slot) => {
-                const available = isAvailable(date, slot);
-                return (
-                  <li key={slot} className="reservation-day-slot" data-available={available}>
-                    <span className="reservation-slot-time">{slot}</span>
-                    <span className="reservation-slot-status">
-                      {available ? '○ 予約可能' : '× 予約不可'}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="reservation-slots-rows">
+              <ul className="reservation-day-slots reservation-day-slots--morning" aria-label="9時〜12時">
+                {SLOTS_MORNING.map((slot) => {
+                  const available = isAvailable(date, slot);
+                  return (
+                    <li key={slot} className="reservation-day-slot" data-available={available}>
+                      <span className="reservation-slot-time">{slot}</span>
+                      <span className="reservation-slot-status">
+                        {available ? '○ 予約可能' : '× 予約不可'}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <ul className="reservation-day-slots reservation-day-slots--afternoon" aria-label="14時以降">
+                {SLOTS_AFTERNOON.map((slot) => {
+                  const available = isAvailable(date, slot);
+                  return (
+                    <li key={slot} className="reservation-day-slot" data-available={available}>
+                      <span className="reservation-slot-time">{slot}</span>
+                      <span className="reservation-slot-status">
+                        {available ? '○ 予約可能' : '× 予約不可'}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         )}
       </div>
