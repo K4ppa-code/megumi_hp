@@ -1593,6 +1593,11 @@ input, textarea, select {
     color: var(--color-text-muted);
 }
 
+/* スマホのみ表示：予約状況を見て予約してほしい旨のメッセージ */
+.contact-mobile-message {
+    display: none;
+}
+
 /* Contact Form */
 .contact-form-wrapper {
     padding: var(--space-2xl);
@@ -2115,18 +2120,45 @@ input, textarea, select {
         text-align: center;
     }
 
+    .contact-mobile-message {
+        display: block;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: var(--space-lg);
+        line-height: 1.6;
+    }
+
     .contact-method {
-        flex-direction: column;
-        text-align: center;
-        padding: var(--space-xl);
+        flex-direction: row;
+        text-align: left;
+        padding: var(--space-md);
+        gap: var(--space-md);
     }
 
     .contact-method-primary {
-        padding: var(--space-xl);
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .contact-method-primary .method-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .contact-method-primary .method-icon svg {
+        width: 20px;
+        height: 20px;
     }
 
     .method-text strong {
-        font-size: 1.5rem;
+        font-size: 1.15rem;
+    }
+
+    .contact-hours {
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .contact-hours p {
+        font-size: 0.85rem;
     }
 
     .contact-form-wrapper {
