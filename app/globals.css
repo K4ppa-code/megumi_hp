@@ -1393,21 +1393,31 @@ input, textarea, select {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4xl);
 }
-/* ご予約セクション：デスクトップは「説明～営業日」と「予約状況」を横並び、メール問合せは下でフル幅 */
+/* ご予約セクション：タイトル → 電話・営業日を横並び → 予約状況（横長）→ メール問合せ */
 .contact-content--stacked {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--space-2xl);
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 100%;
 }
 .contact-content--stacked .contact-form-wrapper {
-    grid-column: 1 / -1;
+    grid-column: 1;
+}
+/* 電話番号と営業日を横並び */
+.contact-content--stacked .contact-methods {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+}
+.contact-content--stacked .contact-methods > .contact-method,
+.contact-content--stacked .contact-methods > .contact-hours {
+    flex: 1 1 240px;
+    min-width: 0;
 }
 .contact-reservation-status {
     margin-top: 0;
     margin-bottom: 0;
     min-width: 0;
+    width: 100%;
 }
 .contact-reservation-status .reservation-status {
     padding: var(--space-2xl);
@@ -1454,6 +1464,13 @@ input, textarea, select {
 }
 .contact-reservation-status .reservation-status .reservation-status-error {
     color: var(--color-accent);
+}
+/* 予約状況を横に長く：内側の container を広げ、スロットを横並び多めに */
+.contact-reservation-status .reservation-status .container {
+    max-width: 100%;
+}
+.contact-reservation-status .reservation-day-slots {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 }
 
 .contact-description {
@@ -1609,6 +1626,9 @@ input, textarea, select {
     .contact-content,
     .contact-content--stacked {
         grid-template-columns: 1fr;
+    }
+    .contact-content--stacked .contact-methods {
+        flex-direction: column;
     }
     .contact-reservation-status {
         margin-top: var(--space-2xl);
