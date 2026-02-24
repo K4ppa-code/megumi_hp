@@ -2,25 +2,25 @@
    CSS Variables & Reset
 ======================================== */
 :root {
-    /* Colors */
-    --color-primary: #1a4d3e;
-    --color-primary-light: #2d7a64;
-    --color-primary-dark: #0f3329;
-    --color-secondary: #c9a961;
-    --color-secondary-light: #ddc48a;
-    --color-accent: #8b5a3c;
+    /* Colors - ほのぼの warm palette */
+    --color-primary: #6b9e7d;
+    --color-primary-light: #8bb89a;
+    --color-primary-dark: #4a7d5e;
+    --color-secondary: #e0a87c;
+    --color-secondary-light: #f0c4a8;
+    --color-accent: #c48b6a;
 
-    --color-bg: #faf9f7;
-    --color-bg-alt: #f5f3ef;
-    --color-bg-dark: #1a1a1a;
+    --color-bg: #fdf8f3;
+    --color-bg-alt: #f7f0e8;
+    --color-bg-dark: #3e3530;
 
-    --color-text: #2c2c2c;
-    --color-text-light: #666666;
-    --color-text-muted: #999999;
+    --color-text: #4a3b32;
+    --color-text-light: #7d6e63;
+    --color-text-muted: #a69585;
     --color-white: #ffffff;
 
     /* Typography */
-    --font-sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Zen Maru Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-serif: 'Noto Serif JP', 'Yu Mincho', serif;
 
     /* Spacing */
@@ -43,15 +43,15 @@
     --transition-slow: 0.5s ease;
 
     /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --shadow-sm: 0 2px 12px rgba(74, 59, 50, 0.06);
+    --shadow-md: 0 4px 24px rgba(74, 59, 50, 0.08);
+    --shadow-lg: 0 8px 40px rgba(74, 59, 50, 0.1);
 
     /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
     --radius-full: 9999px;
 }
 
@@ -203,7 +203,7 @@ input, textarea, select {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-secondary-light) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -262,7 +262,7 @@ input, textarea, select {
 .password-step input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(26, 77, 62, 0.1);
+    box-shadow: 0 0 0 3px rgba(107, 158, 125, 0.15);
 }
 
 .password-btn {
@@ -361,7 +361,7 @@ input, textarea, select {
 }
 
 .header.scrolled {
-    background: rgba(250, 249, 247, 0.95);
+    background: rgba(253, 248, 243, 0.95);
     backdrop-filter: blur(10px);
     padding: var(--space-md) 0;
     box-shadow: var(--shadow-sm);
@@ -472,7 +472,7 @@ input, textarea, select {
 @media (max-width: 768px) {
     .header {
         padding: var(--space-sm) 0;
-        background: rgba(250, 249, 247, 0.98);
+        background: rgba(253, 248, 243, 0.98);
         backdrop-filter: blur(10px);
         box-shadow: var(--shadow-sm);
     }
@@ -573,9 +573,9 @@ input, textarea, select {
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg,
-        rgba(26, 77, 62, 0.03) 0%,
-        rgba(201, 169, 97, 0.05) 50%,
-        rgba(250, 249, 247, 1) 100%
+        rgba(107, 158, 125, 0.06) 0%,
+        rgba(224, 168, 124, 0.06) 50%,
+        rgba(253, 248, 243, 1) 100%
     );
 }
 
@@ -1079,7 +1079,7 @@ input, textarea, select {
     padding: var(--space-2xl);
     background: var(--color-white);
     border-radius: var(--radius-lg);
-    border-left: 4px solid var(--color-primary);
+    border-left: 4px solid var(--color-secondary);
 }
 
 .nerves-treatment h4 {
@@ -1376,7 +1376,7 @@ input, textarea, select {
 ======================================== */
 .contact {
     padding: var(--space-4xl) 0;
-    background: var(--color-primary-dark);
+    background: var(--color-primary);
     color: var(--color-white);
 }
 
@@ -1535,7 +1535,7 @@ input, textarea, select {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(26, 77, 62, 0.1);
+    box-shadow: 0 0 0 3px rgba(107, 158, 125, 0.15);
 }
 
 .form-group textarea {
@@ -1871,7 +1871,7 @@ input, textarea, select {
         padding: var(--space-xl);
         text-align: center;
         border-left: none;
-        border-top: 4px solid var(--color-primary);
+        border-top: 4px solid var(--color-secondary);
     }
 
     /* Symptoms mobile */
@@ -2181,4 +2181,431 @@ input, textarea, select {
     .mobile-bottom-nav span {
         display: none;
     }
+}
+
+/* ========================================
+   Reservation Status (RSC)
+======================================== */
+.reservation-status {
+    padding: var(--space-3xl) 0;
+    background: var(--color-bg-alt);
+}
+.reservation-status-error {
+    color: var(--color-accent);
+    margin-top: var(--space-md);
+}
+.reservation-status-empty {
+    color: var(--color-text-muted);
+    margin-top: var(--space-lg);
+}
+.reservation-dropdowns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+.reservation-dropdown-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+.reservation-dropdown {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid rgba(74, 59, 50, 0.2);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    background: var(--color-white);
+    cursor: pointer;
+}
+.reservation-status-loading {
+    color: var(--color-text-muted);
+    padding: var(--space-lg) 0;
+}
+.reservation-day-result {
+    margin-top: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--color-white);
+    border: 1px solid rgba(74, 59, 50, 0.1);
+    border-radius: var(--radius-md);
+}
+.reservation-day-title {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+.reservation-day-slots {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-sm);
+}
+.reservation-day-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+}
+.reservation-day-slot[data-available="true"] .reservation-slot-status { color: var(--color-primary-dark); font-weight: 500; }
+.reservation-day-slot[data-available="false"] .reservation-slot-status { color: var(--color-text-muted); }
+.reservation-calendar {
+    margin-top: var(--space-lg);
+    overflow-x: auto;
+    border: 1px solid rgba(74, 59, 50, 0.12);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+}
+.reservation-calendar-header,
+.reservation-calendar-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(74, 59, 50, 0.08);
+}
+.reservation-calendar-row:last-child {
+    border-bottom: none;
+}
+.reservation-calendar-cell {
+    padding: var(--space-sm) var(--space-xs);
+    min-width: 2.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+.reservation-calendar-date {
+    min-width: 4rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+.reservation-calendar-header .reservation-calendar-cell {
+    font-weight: 600;
+    background: var(--color-bg-alt);
+    color: var(--color-text-light);
+}
+.reservation-calendar-slot[data-available="true"] {
+    color: var(--color-primary-dark);
+    font-weight: 500;
+}
+.reservation-calendar-slot[data-available="false"] {
+    color: var(--color-text-muted);
+}
+
+/* Check Availability (client) */
+.check-availability {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+}
+.check-availability h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+.check-availability-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+}
+.check-availability-form input[type="date"] {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid rgba(74, 59, 50, 0.2);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+}
+.check-availability-result {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(74, 59, 50, 0.1);
+}
+.check-availability-date {
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+}
+.check-availability-slots {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-xs);
+}
+.check-availability-slots li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+}
+.check-availability-slots li[data-available="1"] .slot-status { color: var(--color-primary-dark); }
+.check-availability-slots li[data-available="0"] .slot-status { color: var(--color-text-muted); }
+.check-availability-slots li[data-available="null"] .slot-status { color: var(--color-text-muted); opacity: 0.8; }
+
+/* Admin page */
+.admin-page {
+  min-height: 100vh;
+  padding: var(--space-2xl) 0;
+  background: var(--color-bg);
+}
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.admin-header h1 {
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+.admin-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+.admin-logout-btn {
+  font-size: 0.875rem;
+}
+.admin-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+.admin-login-wrapper {
+  max-width: 360px;
+  width: 100%;
+  padding: var(--space-2xl);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.admin-login-wrapper h1 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+.admin-login-description {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xl);
+}
+.admin-login-form label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+.admin-login-form input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid rgba(74, 59, 50, 0.2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.admin-login-form input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+.admin-login-form .btn {
+  width: 100%;
+}
+.admin-login-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+.admin-login-buttons .btn {
+  flex: 1;
+}
+.admin-login-error {
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm);
+  background: rgba(196, 139, 106, 0.1);
+  border-radius: var(--radius-sm);
+}
+.admin-description {
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xl);
+  max-width: 560px;
+}
+.admin-calendar {
+  margin-top: var(--space-lg);
+}
+.admin-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+.admin-calendar-title {
+  font-size: 1.25rem;
+  min-width: 120px;
+  text-align: center;
+}
+.admin-calendar-hint {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+.admin-calendar-nav-dropdowns {
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+.admin-dropdown-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+.admin-dropdown {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid rgba(74, 59, 50, 0.2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  background: var(--color-white);
+  cursor: pointer;
+}
+.admin-calendar-loading {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--space-xl);
+}
+.admin-day-slots {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border: 1px solid rgba(74, 59, 50, 0.1);
+  border-radius: var(--radius-md);
+}
+.admin-day-title {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+.admin-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--space-sm);
+}
+.admin-slot-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+.admin-slot-btn:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+.admin-slot-available {
+  background: var(--color-bg-alt);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary-light);
+}
+.admin-slot-available:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  color: var(--color-white);
+  border-color: var(--color-primary-dark);
+}
+.admin-slot-unavailable {
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border-color: var(--color-text-muted);
+}
+.admin-slot-unavailable:hover:not(:disabled) {
+  background: var(--color-bg-dark);
+  color: var(--color-white);
+  border-color: var(--color-bg-dark);
+}
+.admin-slot-time {
+  font-weight: 600;
+}
+.admin-slot-mark {
+  font-size: 1.25rem;
+}
+.admin-calendar-grid {
+  overflow-x: auto;
+  border: 1px solid rgba(74, 59, 50, 0.12);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+}
+.admin-calendar-header,
+.admin-calendar-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(74, 59, 50, 0.08);
+}
+.admin-calendar-row:last-child { border-bottom: none; }
+.admin-calendar-cell {
+  padding: var(--space-sm) var(--space-xs);
+  min-width: 2.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.admin-calendar-date {
+  min-width: 4rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+.admin-calendar-header .admin-calendar-cell {
+  font-weight: 600;
+  background: var(--color-bg-alt);
+  color: var(--color-text-light);
+  cursor: default;
+}
+.admin-calendar-slot[data-available="true"] {
+  color: var(--color-primary-dark);
+  font-weight: 500;
+}
+.admin-calendar-slot[data-available="true"]:hover {
+  background: var(--color-primary-light);
+  color: var(--color-white);
+}
+.admin-calendar-slot[data-available="false"] {
+  color: var(--color-text-muted);
+}
+.admin-calendar-slot[data-available="false"]:hover {
+  background: var(--color-bg-dark);
+  color: var(--color-white);
+}
+.admin-calendar-slot[data-available="none"]:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+.admin-calendar-slot:disabled {
+  cursor: wait;
+  opacity: 0.8;
 }

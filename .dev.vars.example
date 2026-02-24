@@ -1,0 +1,7 @@
+# 管理画面の認証用（本番は wrangler secret put で設定）
+# このファイルを .dev.vars にコピーし、値を設定してください。
+# .dev.vars は git に含めないでください。
+# ADMIN_SESSION_SECRET は省略可（未設定時は上記2つから自動導出）
+
+ADMIN_PASSWORD_1=1129
+ADMIN_PASSWORD_2=じろー

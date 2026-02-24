@@ -1,0 +1,22 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "takeuchi-acupuncture",
+	// 互換性日付（必須）
+	"compatibility_date": "2025-01-15",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "takeuchi-reservations",
+			"database_id": "d87e5aa9-d1d4-428e-8a2f-3688727e09cc",
+			"migrations_dir": "migrations"
+		}
+	]
+}

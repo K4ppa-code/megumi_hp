@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# Configuration files
+wrangler.jsonc
+.gitignore
+.assetsignore
+README.md
+
+# Wrangler
+.wrangler/
+.dev.vars
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
