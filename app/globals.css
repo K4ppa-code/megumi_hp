@@ -2111,7 +2111,7 @@ input, textarea, select {
         height: 300px;
     }
 
-    /* Contact mobile */
+    /* Contact mobile：電話・営業時間をコンパクトに */
     .contact {
         padding: var(--space-3xl) 0;
     }
@@ -2120,45 +2120,55 @@ input, textarea, select {
         text-align: center;
     }
 
+    .contact-content--stacked .contact-methods {
+        gap: var(--space-sm);
+    }
+
     .contact-mobile-message {
         display: block;
-        font-size: 0.9rem;
+        font-size: 0.875rem;
         color: rgba(255, 255, 255, 0.9);
-        margin-bottom: var(--space-lg);
-        line-height: 1.6;
+        margin-bottom: var(--space-md);
+        line-height: 1.5;
     }
 
     .contact-method {
         flex-direction: row;
         text-align: left;
-        padding: var(--space-md);
-        gap: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+        gap: var(--space-sm);
     }
 
     .contact-method-primary {
-        padding: var(--space-md) var(--space-lg);
-    }
-
-    .contact-method-primary .method-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .contact-method-primary .method-icon svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    .method-text strong {
-        font-size: 1.15rem;
-    }
-
-    .contact-hours {
         padding: var(--space-sm) var(--space-md);
     }
 
+    .contact-method-primary .method-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    .contact-method-primary .method-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .contact-method-primary .method-text strong {
+        font-size: 1rem;
+    }
+
+    .contact-method-primary .method-text small {
+        font-size: 0.7rem;
+    }
+
+    .contact-hours {
+        padding: var(--space-xs) var(--space-sm);
+    }
+
     .contact-hours p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        margin: 0.15em 0;
     }
 
     .contact-form-wrapper {
