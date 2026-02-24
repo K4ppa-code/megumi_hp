@@ -1393,22 +1393,67 @@ input, textarea, select {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4xl);
 }
-/* ご予約セクション：縦並び（電話 → 予約状況 → メール問合せ） */
+/* ご予約セクション：デスクトップは「説明～営業日」と「予約状況」を横並び、メール問合せは下でフル幅 */
 .contact-content--stacked {
-    grid-template-columns: 1fr;
-    max-width: 720px;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    max-width: 960px;
     margin-left: auto;
     margin-right: auto;
 }
+.contact-content--stacked .contact-form-wrapper {
+    grid-column: 1 / -1;
+}
 .contact-reservation-status {
-    margin-top: var(--space-2xl);
-    margin-bottom: var(--space-2xl);
+    margin-top: 0;
+    margin-bottom: 0;
+    min-width: 0;
 }
 .contact-reservation-status .reservation-status {
     padding: var(--space-2xl);
     border-radius: var(--radius-md);
     background: var(--color-white);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    /* 白背景のカード内なので文字を濃い色に（.contact の白指定を上書き） */
+    color: var(--color-primary-dark);
+}
+.contact-reservation-status .reservation-status .section-label {
+    color: var(--color-primary);
+}
+.contact-reservation-status .reservation-status .section-title {
+    color: var(--color-primary-dark);
+}
+.contact-reservation-status .reservation-status .section-description,
+.contact-reservation-status .reservation-status .reservation-status-description {
+    color: var(--color-text);
+}
+.contact-reservation-status .reservation-status .reservation-dropdown-group {
+    color: var(--color-text);
+}
+.contact-reservation-status .reservation-status .reservation-dropdown {
+    color: var(--color-primary-dark);
+    border-color: rgba(74, 59, 50, 0.25);
+}
+.contact-reservation-status .reservation-status .reservation-day-title {
+    color: var(--color-primary-dark);
+}
+.contact-reservation-status .reservation-status .reservation-day-slot {
+    color: var(--color-text);
+}
+.contact-reservation-status .reservation-status .reservation-slot-time {
+    color: var(--color-text);
+}
+.contact-reservation-status .reservation-status .reservation-slot-status {
+    color: var(--color-primary-dark);
+}
+.contact-reservation-status .reservation-status .reservation-day-slot[data-available="false"] .reservation-slot-status {
+    color: var(--color-text-muted);
+}
+.contact-reservation-status .reservation-status .reservation-status-loading {
+    color: var(--color-text-muted);
+}
+.contact-reservation-status .reservation-status .reservation-status-error {
+    color: var(--color-accent);
 }
 
 .contact-description {
@@ -1561,8 +1606,13 @@ input, textarea, select {
 }
 
 @media (max-width: 768px) {
-    .contact-content {
+    .contact-content,
+    .contact-content--stacked {
         grid-template-columns: 1fr;
+    }
+    .contact-reservation-status {
+        margin-top: var(--space-2xl);
+        margin-bottom: var(--space-2xl);
     }
 }
 
