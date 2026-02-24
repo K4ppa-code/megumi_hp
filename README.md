@@ -24,7 +24,7 @@ Next.jsの開発サーバーが起動します（通常は http://localhost:3000
 npm run build
 ```
 
-Next.jsアプリケーションをビルドします。
+OpenNext で Workers 用にビルドします（`.open-next/` を生成）。Next.js のみビルドしたい場合は `npm run build:next` を使用してください。
 
 ## デプロイ
 
@@ -52,14 +52,12 @@ npm run deploy
 
 #### Workers Builds（CI/CD）でデプロイする場合
 
-Git プッシュで自動デプロイする場合は、**ビルドコマンド**と**デプロイコマンド**を次のように設定してください。
+`npm run build` が OpenNext ビルドになっているため、**ビルドコマンド**はそのままで問題ありません。
 
 | 設定 | 値 |
 |------|-----|
-| **ビルドコマンド** | `npm run build:worker` |
-| **デプロイコマンド** | `npm run deploy:worker` |
-
-※ `npm run build` だけでは `.open-next/worker.js` が生成されません。Workers 用には必ず `build:worker`（OpenNext ビルド）を使ってください。
+| **ビルドコマンド** | `npm run build` |
+| **デプロイコマンド** | `npx wrangler deploy` または `npm run deploy:worker` |
 
 ### 初回デプロイ前の設定
 

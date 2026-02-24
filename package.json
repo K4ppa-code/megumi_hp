@@ -4,7 +4,8 @@
   "description": "竹内鍼灸治療院 - Next.js on Cloudflare Workers",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "opennextjs-cloudflare build",
+    "build:next": "next build",
     "build:worker": "opennextjs-cloudflare build",
     "deploy:worker": "npx wrangler deploy",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",

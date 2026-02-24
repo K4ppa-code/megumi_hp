@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",
-	"name": "takeuchi-acupuncture",
+	"name": "megumi-hp",
 	// 互換性日付（必須）
 	"compatibility_date": "2025-01-15",
 	"compatibility_flags": [
