@@ -50,6 +50,17 @@ npm run deploy
 1. OpenNext Cloudflareアダプターでビルド
 2. Cloudflare Workersにデプロイ
 
+#### Workers Builds（CI/CD）でデプロイする場合
+
+Git プッシュで自動デプロイする場合は、**ビルドコマンド**と**デプロイコマンド**を次のように設定してください。
+
+| 設定 | 値 |
+|------|-----|
+| **ビルドコマンド** | `npm run build:worker` |
+| **デプロイコマンド** | `npm run deploy:worker` |
+
+※ `npm run build` だけでは `.open-next/worker.js` が生成されません。Workers 用には必ず `build:worker`（OpenNext ビルド）を使ってください。
+
 ### 初回デプロイ前の設定
 
 初回デプロイ前に、Cloudflareアカウントにログインします：
